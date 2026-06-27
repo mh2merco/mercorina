@@ -8,13 +8,6 @@ import model.Admin;
 public class Main {
 
     public static void main(String[] args) {
-<<<<<<< Updated upstream
-=======
-        Scanner scanner = new Scanner(System.in);
-        EtudiantService etudiantService = new EtudiantService();
-        SecretaireService secretaireService = new SecretaireService(etudiantService.getEtudiantDAO());
-        AdminService adminService = new AdminService(new dao.AdminDAO(secretaireService.getSecretaireDAO()));
->>>>>>> Stashed changes
 
         Scanner sc = new Scanner(System.in);
         AdminDAO dao = new AdminDAO();
