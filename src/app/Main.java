@@ -1,53 +1,76 @@
 package app;
 
+import DAO.AdminDAO;
+import java.util.Optional;
 import java.util.Scanner;
-import service.AdminService;
+import model.Admin;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        AdminService admin = new AdminService();
+        AdminDAO dao = new AdminDAO();
+
+        System.out.println("=== LOGIN ADMIN ===");
+
+        System.out.print("Login : ");
+        String login = sc.nextLine();
+
+        System.out.print("Mot de passe : ");
+        String mdp = sc.nextLine();
+
+        Optional<Admin> admin = dao.login(login, mdp);
+
+        if (admin.isPresent()) {
+
+            System.out.println("\n✔ Connexion réussie");
+            System.out.println("Bienvenue " + admin.get().getNom());
+
+            menuAdmin(sc);
+
+        } else {
+            System.out.println("\n❌ Login ou mot de passe incorrect");
+        }
+    }
+
+    private static void menuAdmin(Scanner sc) {
+
+        System.out.println("\n=== MENU ADMIN ===");
 
         while (true) {
 
-            System.out.println("\n=== MENU ADMIN ===");
-            System.out.println("1 - Ajouter secrétaire");
+            System.out.println("\n1 - Ajouter secrétaire");
             System.out.println("2 - Supprimer secrétaire");
             System.out.println("3 - Lister secrétaires");
             System.out.println("0 - Quitter");
 
+            System.out.print("Choix : ");
             String choix = sc.nextLine();
 
             switch (choix) {
 
                 case "1":
-                    System.out.print("Nom: ");
-                    String nom = sc.nextLine();
-
-                    System.out.print("Login: ");
-                    String login = sc.nextLine();
-
-                    System.out.print("MDP: ");
-                    String mdp = sc.nextLine();
-
-                    admin.ajouterSecretaire(nom, login, mdp);
-                    System.out.println("Ajout OK");
+                    System.out.println("Ajouter secrétaire...");
+                    // appel service ici
                     break;
 
                 case "2":
-                    System.out.print("ID: ");
-                    admin.supprimerSecretaire(Integer.parseInt(sc.nextLine()));
-                    System.out.println("Supprimé");
+                    System.out.println("Supprimer secrétaire...");
+                    // appel service ici
                     break;
 
                 case "3":
-                    admin.listerSecretaires().forEach(System.out::println);
+                    System.out.println("Lister secrétaires...");
+                    // appel service ici
                     break;
 
                 case "0":
+                    System.out.println("Au revoir");
                     return;
+
+                default:
+                    System.out.println("Choix invalide");
             }
         }
     }

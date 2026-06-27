@@ -1,6 +1,6 @@
 package service;
 
-import dao.SecretaireDAO;
+import DAO.SecretaireDAO;
 import java.util.List;
 import java.util.Optional;
 import model.Secretaire;
