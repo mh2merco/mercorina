@@ -1,31 +1,27 @@
 package service;
 
-import dao.AdminDAO;
-import model.Secretaire;
-
+import dao.SecretaireDAO;
 import java.util.List;
 import java.util.Optional;
+import model.Secretaire;
 
 public class AdminService {
-    private final AdminDAO adminDAO;
 
-    public AdminService(AdminDAO adminDAO) {
-        this.adminDAO = adminDAO;
+    private SecretaireDAO dao = new SecretaireDAO();
+
+    public boolean ajouterSecretaire(String nom, String login, String mdp) {
+        return dao.ajouter(new Secretaire(0, nom, login, mdp));
     }
 
-    public boolean ajouterSecretaire(String id, String nom, String prenom) {
-        return adminDAO.ajouterSecretaire(new Secretaire(id, nom, prenom));
-    }
-
-    public boolean supprimerSecretaire(String id) {
-        return adminDAO.supprimerSecretaire(id);
-    }
-
-    public Optional<Secretaire> rechercherSecretaire(String id) {
-        return adminDAO.rechercherSecretaire(id);
+    public boolean supprimerSecretaire(int id) {
+        return dao.supprimer(id);
     }
 
     public List<Secretaire> listerSecretaires() {
-        return adminDAO.listerSecretaires();
+        return dao.lister();
+    }
+
+    public Optional<Secretaire> rechercherSecretaire(int id) {
+        return dao.rechercher(id);
     }
 }
