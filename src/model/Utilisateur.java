@@ -1,9 +1,11 @@
-public class Etudiant {
-    private String id;
-    private String nom;
-    private String prenom;
+package model;
 
-    public Etudiant(String id, String nom, String prenom) {
+public abstract class Utilisateur {
+    private final String id;
+    private final String nom;
+    private final String prenom;
+
+    public Utilisateur(String id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -23,6 +25,6 @@ public class Etudiant {
 
     @Override
     public String toString() {
-        return "Etudiant{id='" + id + "', nom='" + nom + "', prenom='" + prenom + "'}";
+        return id + " - " + nom + " " + prenom;
     }
 }
